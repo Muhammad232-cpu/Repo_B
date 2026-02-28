@@ -31,7 +31,7 @@ const Log = mongoose.model('Log', new mongoose.Schema({
 cloudinary.config({
   cloud_name: 'djyvjemkj',
   api_key: '698248822319277',
-  api_secret: 'N3MZbaocx903npocWIOH60YPWc'
+  api_secret: 'N3MZbaocx903npocWIOH60YPWEc'
 });
 
 const storage = new CloudinaryStorage({
