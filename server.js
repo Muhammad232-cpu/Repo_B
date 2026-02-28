@@ -1,4 +1,4 @@
-const express = require('express');
+upload' express = require('express');
 const multer = require('multer');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -40,7 +40,7 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage: storage });
 
 // --- 3. API ROUTES ---
-app.post('/upload', upload.single('video'), async (req, res) => {
+app.post('/', upload.single('video'), async (req, res) => {
     try {
         const newEntry = new Log({
             location: `Lat: ${req.body.lat}, Long: ${req.body.long}`,
