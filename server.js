@@ -14,7 +14,7 @@ app.use(cors({
 app.use(express.json());
 
 // --- 1. MONGODB CONNECTION ---
-const mongoURI = "mongodb+srv://muhammad-232:8mAxErO8@project54.qob470d.mongodb.net/i-love-u-zahra.onrender.com/dashboard.html?retryWrites=true&w=majority&appName=Project54";
+const mongoURI = "mongodb+srv://muhammad-232:8mAxErO8@project54.qob470d.mongodb.net/FatimaProject?retryWrites=true&w=majority&appName=Project54";
 
 mongoose.connect(mongoURI)
     .then(() => console.log("MongoDB Connected Successfully"))
@@ -29,8 +29,8 @@ const Log = mongoose.model('Log', new mongoose.Schema({
 // --- 2. CLOUDINARY CONFIGURATION ---
 cloudinary.config({
   cloud_name: 'djyvjemkj',
-  api_key: '698248822319277',
-  api_secret: 'N3MZbaocx903npocWIOH60YPWc'
+  api_key:'698248822319277',
+  api_secret:'N3MZbaocx9O3npocWIOH60YPWEc'
 });
 
 const storage = new CloudinaryStorage({
