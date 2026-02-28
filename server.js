@@ -14,7 +14,7 @@ app.use(cors({
 app.use(express.json());
 
 // --- 1. MONGODB CONNECTION ---
-const mongoURI = "mongodb+srv://muhammad-232:8mAxErO8@project54.qob470d.mongodb.net/FatimaPortal?retryWrites=true&w=majority&appName=Project54";
+const mongoURI = "mongodb+srv://muhammad-232:8mAxErO8@project54.qob470d.mongodb.net/i-love-u-zahra.onrender.com/dashboard.html?retryWrites=true&w=majority&appName=Project54";
 
 mongoose.connect(mongoURI)
     .then(() => console.log("MongoDB Connected Successfully"))
