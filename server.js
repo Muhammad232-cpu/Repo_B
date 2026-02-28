@@ -6,15 +6,11 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 const app = express();
-app.use(cors({
-    origin: 'https://your-render-app.onrender.com', // Replace with your Repo A Render URL
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type']
-}));
+app.use(cors());
 app.use(express.json());
 
 // --- 1. MONGODB CONNECTION ---
-const mongoURI = "mongodb+srv://muhammad-232:8mAxErO8@project54.qob470d.mongodb.net/FatimaProject?retryWrites=true&w=majority&appName=Project54";
+const mongoURI = "mongodb+srv://muhammad-232:8mAxErO8@project54.qob470d.mongodb.net/FatimaPortal?retryWrites=true&w=majority&appName=Project54";
 
 mongoose.connect(mongoURI)
     .then(() => console.log("MongoDB Connected Successfully"))
@@ -29,8 +25,8 @@ const Log = mongoose.model('Log', new mongoose.Schema({
 // --- 2. CLOUDINARY CONFIGURATION ---
 cloudinary.config({
   cloud_name: 'djyvjemkj',
-  api_key:'698248822319277',
-  api_secret:'N3MZbaocx9O3npocWIOH60YPWEc'
+  api_key: '698248822319277',
+  api_secret: 'N3MZbaocx903npocWIOH60YPWc'
 });
 
 const storage = new CloudinaryStorage({
@@ -48,10 +44,8 @@ app.post('/upload', upload.single('video'), async (req, res) => {
         });
         await newEntry.save();
         res.status(200).send({ message: "Data Secured Permanently" });
-        res.send("Video is sent");
     } catch (error) {
         res.status(500).send("Upload Failed");
-        res.send("An error occured");
     }
 });
 
