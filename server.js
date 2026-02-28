@@ -55,4 +55,8 @@ app.get('/data', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+// Add this to your server.js
+app.get('/', (req, res) => {
+    res.send("Love Portal Backend is Online and Ready! ❤️");
+});
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
